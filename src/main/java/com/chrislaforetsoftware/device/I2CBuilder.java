@@ -23,6 +23,8 @@ public abstract class I2CBuilder {
         sb.append(device.getAddress() + "\r\n");
         sb.append("Controller = ");
         sb.append(device.getController() + "\r\n");
+        sb.append("Byte order = ");
+        sb.append(device.getByteOrder().toString() + "\r\n");
         return sb.toString();
     }
 
