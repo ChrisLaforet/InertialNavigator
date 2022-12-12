@@ -4,7 +4,7 @@ I have become fascinated with the way aircraft inertial navigation works and am 
 
 DISCLAIMER: THIS IS AN EXPERIMENTAL PROJECT AND IS NOT TO BE USED AS-IS FOR ANY REAL-WORLD NAVIGATION APPLICATIONS.  ANY USE OF THIS CODEBASE IS ENTIRELY AT YOUR OWN RISK.
 
-#Testbed
+# Testbed
 
 The testbed for this is a Raspberry Pi 4 with 4G RAM and the X001G63URN fro Ozzmaker.com which provides an IMU, GPS, and the 10D0F chip.  This exposes an accelerometer, gyroscope, and a barometric sensor in addition to a GPS receiver (of course).
 
