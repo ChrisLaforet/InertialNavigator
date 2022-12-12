@@ -11,8 +11,12 @@ public abstract class I2CBuilder {
         device = builder.build();
     }
 
+    public abstract String getDeviceName();
+
     public String getDetails() {
         final StringBuffer sb = new StringBuffer();
+        sb.append("Device type=");
+        sb.append(getDeviceName() + "\r\n");
         sb.append("AddressSize = ");
         sb.append(device.getAddressSize() + "\r\n");
         sb.append("Address = ");
