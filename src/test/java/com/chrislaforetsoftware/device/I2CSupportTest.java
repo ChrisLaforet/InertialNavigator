@@ -46,4 +46,12 @@ class I2CSupportTest {
         assertFalse(I2CSupport.validateNMEALine("$GNRMC,071423.00,A,3254.18201,S,15243.27916,E,0.252,,110721,,,A*72").isPresent());
     }
 
+    @Test
+    void givenGPSString_whenExtractingComponents_thenReturnsComponents() {
+        final String [] components = I2CSupport.extractGPSComponents("$GNVTG,,T,,M,0.252,N,0.466,K,A*3C");
+        assertEquals(10, components.length);
+        assertEquals("GNVTG", components[0]);
+        assertEquals("A", components[9]);
+    }
+
 }

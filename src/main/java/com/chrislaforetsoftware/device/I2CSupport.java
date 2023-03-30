@@ -45,4 +45,9 @@ public class I2CSupport {
         }
         return Optional.of(line);
     }
+
+    public static String[] extractGPSComponents(String line) {
+        String[] parts = line.split("\\*", 2);
+        return parts[0].substring(1).split(",");
+    }
 }
