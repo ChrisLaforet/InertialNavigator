@@ -33,6 +33,17 @@ class I2CSupportTest {
 
     @Test
     void givenNMEAString_whenContainValidString_thenReturnsString() {
-        assertTrue(I2CSupport.validateNMEALine("$GNRMC,071423.00,A,3254.18201,S,15243.27916,E,0.252,,110721,,,A*72").isPresent());
+        assertTrue(I2CSupport.validateNMEALine("$GNVTG,,T,,M,0.252,N,0.466,K,A*3C").isPresent());
     }
+
+    @Test
+    void givenNMEAString_whenContainValidString2_thenReturnsString() {
+        assertTrue(I2CSupport.validateNMEALine("$GNGSA,A,3,30,14,07,17,13,19,15,,,,,,1.66,1.01,1.31*17").isPresent());
+    }
+
+    @Test
+    void givenNMEAString_whenContainInvalidString_thenReturnsString() {
+        assertFalse(I2CSupport.validateNMEALine("$GNRMC,071423.00,A,3254.18201,S,15243.27916,E,0.252,,110721,,,A*72").isPresent());
+    }
+
 }

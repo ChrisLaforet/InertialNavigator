@@ -32,26 +32,17 @@ public class I2CSupport {
             return Optional.empty();
         }
 
-        // split twice
+        // split twice to get $ line and checksum
         String[] parts = line.split("\\*", 2);
 
         int checkSum = 0;
         for (char ch : parts[0].substring(1).toCharArray()) {       // remove $ and checksum
             checkSum ^= (int)ch;
         }
-        int x = Integer.parseInt(parts[1], 16);
+
         if (checkSum != Integer.parseInt(parts[1], 16)) {
             return Optional.empty();
         }
         return Optional.of(line);
-//            gpsChars = ''.join(chr(c) for c in gpsLine)
-//        if (gpsChars.find('txbuf') == -1):          # Check #4, skip txbuff allocation error
-//                gpsStr, chkSum = gpsChars.split('*',2)  # Check #5 only split twice to avoid unpack error
-//                gpsComponents = gpsStr.split(',')
-//        chkVal = 0
-//        for ch in gpsStr[1:]: # Remove the $ and do a manual checksum on the rest of the NMEA sentence
-//        chkVal ^= ord(ch)
-//        if (chkVal == int(chkSum, 16)): # Compare the calculated checksum with the one in the NMEA sentence
-//        print gpsChars
     }
 }
