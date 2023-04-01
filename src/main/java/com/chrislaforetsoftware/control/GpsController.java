@@ -55,7 +55,6 @@ public class GpsController {
 
             while (true) {
                 byte b = gps.readByte();
- System.err.print("READ=" + b);
                 if (b == '\n') {
                     break;
                 } else if (b == (byte)255) {
