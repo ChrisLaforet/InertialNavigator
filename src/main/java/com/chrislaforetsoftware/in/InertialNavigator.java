@@ -7,6 +7,8 @@ import com.chrislaforetsoftware.device.Gps;
 import com.chrislaforetsoftware.device.GyroAccelerometer;
 import com.chrislaforetsoftware.device.Magnetometer;
 
+import java.util.Optional;
+
 public class InertialNavigator {
 
     public static final int GYRO_ACCELEROMETER_ADDRESS = 0x6a;
@@ -31,6 +33,11 @@ public class InertialNavigator {
         System.out.println("Magnetometer temp: " + magnetometerController.getTemperature());
 
         final GpsController gpsController = new GpsController(gps);
-        System.out.println("GPS data: " + gpsController.readLine().get());
+        for (int count = 0; count < 24; count++) {
+            final Optional<String> gpsString = gpsController.readLine();
+            if (gpsString.isPresent()) {
+                System.out.println("GPS data: " + gpsString.get());
+            }
+        }
     }
 }
