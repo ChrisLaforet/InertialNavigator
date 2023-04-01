@@ -5,8 +5,10 @@ import com.diozero.api.I2CDevice;
 public abstract class I2CBuilder {
 
     private I2CDevice device;
+    private int address;
 
     public I2CBuilder(int address) {
+        this.address = address;
         I2CDevice.Builder builder = I2CDevice.builder(address);
         device = builder.build();
     }
@@ -29,7 +31,7 @@ public abstract class I2CBuilder {
     }
 
     public byte readByte() {
-        return device.readByte();
+        return device.readByteData(address);
     }
 
     public byte readByteFrom(int register) {
