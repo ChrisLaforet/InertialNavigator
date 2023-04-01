@@ -9,6 +9,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//$GPVTG	Vector track and Speed over the Ground
+//$GPGGA	GGA - essential fix data which provide 3D location and accuracy data.
+//$GPGLL	GLL - Geographic Latitude and Longitude
+//$GPGSA	GSA - details on the nature of the fix. It includes the numbers of the satellites
+//$GPGSV	Detailed satelite data
+//$GPRMC	RMC - The recommended minimum
+//
+//# GUIDE
+//        # http://ava.upuaut.net/?p=768
+//
+//        GPSDAT = {
+//        'strType': None,
+//        'fixTime': None,
+//        'lat': None,
+//        'latDir': None,
+//        'lon': None,
+//        'lonDir': None,
+//        'fixQual': None,
+//        'numSat': None,
+//        'horDil': None,
+//        'alt': None,
+//        'altUnit': None,
+//        'galt': None,
+//        'galtUnit': None,
+//        'DPGS_updt': None,
+//        'DPGS_ID': None
+//        }
+
 public class GpsController {
 
     private Gps gps;
@@ -27,6 +55,7 @@ public class GpsController {
 
             while (true) {
                 byte b = gps.readByte();
+ System.err.print("READ=" + b);
                 if (b == '\n') {
                     break;
                 } else if (b == (byte)255) {
