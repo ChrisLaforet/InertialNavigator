@@ -31,6 +31,6 @@ public class InertialNavigator {
         System.out.println("Magnetometer temp: " + magnetometerController.getTemperature());
 
         final GpsController gpsController = new GpsController(gps);
-        System.out.println("GPS data: " + gpsController.read());
+        System.out.println("GPS data: " + gpsController.readLine().get());
     }
 }
