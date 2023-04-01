@@ -50,4 +50,12 @@ public class I2CSupport {
         String[] parts = line.split("\\*", 2);
         return parts[0].substring(1).split(",");
     }
+
+    public static String[] validateNMEALineAndExtractGPSComponents(String line) {
+        final Optional<String> validated = validateNMEALine(line);
+        if (validated.isEmpty()) {
+            return new String[0];
+        }
+        return extractGPSComponents(validated.get());
+    }
 }
