@@ -17,17 +17,17 @@ public abstract class I2CBuilder {
 
     public String getDetails() {
         final StringBuffer sb = new StringBuffer();
-        sb.append("Device type=");
-        sb.append(getDeviceName() + "\r\n");
-        sb.append("AddressSize = ");
-        sb.append(device.getAddressSize() + "\r\n");
-        sb.append("Address = ");
-        sb.append(device.getAddress());
-        sb.append(" (0x" + Integer.toHexString(device.getAddress()) + ")\r\n");
-        sb.append("Controller = ");
-        sb.append(device.getController() + "\r\n");
-        sb.append("Byte order = ");
-        sb.append(device.getByteOrder().toString() + "\r\n");
+        sb.append("Device type=")
+            .append(getDeviceName() + "\r\n")
+            .append("AddressSize = ")
+            .append(device.getAddressSize() + "\r\n")
+            .append("Address = ")
+            .append(device.getAddress())
+            .append(" (0x" + Integer.toHexString(device.getAddress()) + ")\r\n")
+            .append("Controller = ")
+            .append(device.getController() + "\r\n")
+            .append("Byte order = ")
+            .append(device.getByteOrder().toString() + "\r\n");
         return sb.toString();
     }
 
