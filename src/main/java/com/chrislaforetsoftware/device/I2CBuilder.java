@@ -7,9 +7,9 @@ public abstract class I2CBuilder {
     private I2CDevice device;
     private int address;
 
-    public I2CBuilder(int address) {
+    public I2CBuilder(int busNumber, int address) {
         this.address = address;
-        I2CDevice.Builder builder = I2CDevice.builder(address);
+        I2CDevice.Builder builder = I2CDevice.builder(address).setController(busNumber);
         device = builder.build();
     }
 

@@ -27,8 +27,8 @@ public class Magnetometer extends I2CBuilder {
     public static final int LIS3MDL_INT_THS_L = 0x32;
     public static final int LIS3MDL_INT_THS_H = 0x33;
 
-    public Magnetometer(int address) {
-        super(address);
+    public Magnetometer(int busNumber, int address) {
+        super(busNumber, address);
     }
 
     public String getDeviceName() {

@@ -45,8 +45,8 @@ public class GyroAccelerometer extends I2CBuilder {
     public static final int LSM6DSL_WAKE_UP_THS = 0x5B;
     public static final int LSM6DSL_FUNC_SRC1 = 0x53;
     
-    public GyroAccelerometer(int address) {
-        super(address);
+    public GyroAccelerometer(int busNumber, int address) {
+        super(busNumber, address);
     }
 
     public String getDeviceName() {

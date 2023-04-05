@@ -2,8 +2,8 @@ package com.chrislaforetsoftware.device;
 
 public class Gps extends I2CBuilder {
 
-    public Gps(int address) {
-        super(address);
+    public Gps(int busNumber, int address) {
+        super(busNumber, address);
     }
 
     public String getDeviceName() {

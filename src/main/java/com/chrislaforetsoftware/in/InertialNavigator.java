@@ -16,12 +16,17 @@ public class InertialNavigator {
     public static final int PRESSURE_SENSOR_ADDRESS = 0x77;
     public static final int GPS_ADDRESS = 0x42;     // not showing on bus yet
 
+    public static final int BUS_CONTROLLER_ZERO = 0;
+    public static final int BUS_CONTROLLER_ONE = 1;
+
     public static void main(String [] args) {
         //System.out.println("Hello World");
 
-        final Magnetometer magnetometer = new Magnetometer(MAGNETOMETER_ADDRESS);
-        final GyroAccelerometer accelerometer = new GyroAccelerometer(GYRO_ACCELEROMETER_ADDRESS);
-        final Gps gps = new Gps(GPS_ADDRESS);
+        // TODO: Permit selection of the BUS in args
+
+        final Magnetometer magnetometer = new Magnetometer(BUS_CONTROLLER_ONE, MAGNETOMETER_ADDRESS);
+        final GyroAccelerometer accelerometer = new GyroAccelerometer(BUS_CONTROLLER_ONE, GYRO_ACCELEROMETER_ADDRESS);
+        final Gps gps = new Gps(BUS_CONTROLLER_ONE, GPS_ADDRESS);
         System.out.println(magnetometer.getDetails());
         System.out.println("\r\n");
         System.out.println(accelerometer.getDetails());
