@@ -58,12 +58,47 @@ public class PressureSensor extends I2CBuilder {
     public static final int BMP388_REG_ADD_P10 = 0x44;
     public static final int BMP388_REG_ADD_P11 = 0x45;
 
+    private boolean isBMP388 = false;
+
     public PressureSensor(int busNumber, int address) {
         super(busNumber, address);
+        calibrate();
     }
 
     @Override
     public String getDeviceName() {
         return "PressureSensor";
+    }
+
+    public void calibrate() {
+        if (readByteFrom(BMP388_REG_ADD_WIA) == BMP388_REG_VAL_WIA) {
+            isBMP388 = true;
+
+            if ((readByteFrom(BMP388_REG_ADD_STATUS) & BMP388_REG_VAL_CMD_RDY) != 0) {
+                writeByteTo((byte) BMP388_REG_VAL_SOFT_RESET, BMP388_REG_ADD_CMD);
+            }
+            sleepFor(10);
+        } else {
+            writeByteTo((byte)(BMP388_REG_VAL_PRESS_EN | BMP388_REG_VAL_TEMP_EN | BMP388_REG_VAL_NORMAL_MODE), BMP388_REG_ADD_PWR_CTRL);
+        }
+
+        loadCalibration();
+    }
+
+    public void loadCalibration() {
+        var t1 = readUnsignedInt16From(BMP388_REG_ADD_T1_LSB);
+        var t2 = readUnsignedInt16From(BMP388_REG_ADD_T2_LSB);
+        var t3 = readByteFrom(BMP388_REG_ADD_T3);
+        var p1 = readSignedInt16From(BMP388_REG_ADD_P1_LSB);
+        var p2 = readSignedInt16From(BMP388_REG_ADD_P2_LSB);
+        var p3 = readByteFrom(BMP388_REG_ADD_P3);
+        var p4 = readByteFrom(BMP388_REG_ADD_P4);
+        var p5 = readUnsignedInt16From(BMP388_REG_ADD_P5_LSB);
+        var p6 = readUnsignedInt16From(BMP388_REG_ADD_P6_LSB);
+        var p7 = readByteFrom(BMP388_REG_ADD_P7);
+        var p8 = readByteFrom(BMP388_REG_ADD_P8);
+        var p9 = readSignedInt16From(BMP388_REG_ADD_P9_LSB);
+        var p10 = readByteFrom(BMP388_REG_ADD_P10);
+        var p11 = readByteFrom(BMP388_REG_ADD_P11);
     }
 }

@@ -31,6 +31,14 @@ public abstract class I2CBuilder {
         return sb.toString();
     }
 
+    public void sleepFor(long msec) {
+        try {
+            Thread.sleep(msec);
+        } catch (InterruptedException ie) {
+            // do nothing for now
+        }
+    }
+
     public byte readByte() {
         return device.readByteData(address);
     }
@@ -44,5 +52,19 @@ public abstract class I2CBuilder {
 
     public void writeByteTo(byte value, int register) {
         device.writeByteData(value, register);
+    }
+
+    public int readUnsignedInt16From(int register) {
+        byte lsb = readByteFrom(register);
+        byte msb = readByteFrom(register + 0x1);
+        return (msb << 0x08) | (lsb & 0xff);
+    }
+
+    public int readSignedInt16From(int register) {
+        int value = readUnsignedInt16From(register);
+        if (value > 0x7fff) {
+            return value - 0xffff;
+        }
+        return value;
     }
 }
