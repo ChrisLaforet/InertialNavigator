@@ -6,7 +6,7 @@ import com.chrislaforetsoftware.device.Magnetometer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MagnetometerController {
+public class MagnetometerController implements IController {
 
     public enum ScaleRange {
         Range4Gauss,

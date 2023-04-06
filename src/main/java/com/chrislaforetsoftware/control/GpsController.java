@@ -37,7 +37,7 @@ import java.util.Optional;
 //        'DPGS_ID': None
 //        }
 
-public class GpsController {
+public class GpsController implements IController {
 
     private Gps gps;
 

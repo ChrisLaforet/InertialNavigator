@@ -6,6 +6,7 @@ import com.chrislaforetsoftware.control.MagnetometerController;
 import com.chrislaforetsoftware.device.Gps;
 import com.chrislaforetsoftware.device.GyroAccelerometer;
 import com.chrislaforetsoftware.device.Magnetometer;
+import com.chrislaforetsoftware.device.PressureSensor;
 
 import java.util.Optional;
 
@@ -27,11 +28,16 @@ public class InertialNavigator {
         final Magnetometer magnetometer = new Magnetometer(BUS_CONTROLLER_ONE, MAGNETOMETER_ADDRESS);
         final GyroAccelerometer accelerometer = new GyroAccelerometer(BUS_CONTROLLER_ONE, GYRO_ACCELEROMETER_ADDRESS);
         final Gps gps = new Gps(BUS_CONTROLLER_ONE, GPS_ADDRESS);
+        final PressureSensor pressureSensor = new PressureSensor(BUS_CONTROLLER_ONE, PRESSURE_SENSOR_ADDRESS);
+
         System.out.println(magnetometer.getDetails());
         System.out.println("\r\n");
         System.out.println(accelerometer.getDetails());
         System.out.println("\r\n");
         System.out.println(gps.getDetails());
+        System.out.println("\r\n");
+        System.out.println(pressureSensor.getDetails());
+        System.out.println("\r\n");
 
         final MagnetometerController magnetometerController = new MagnetometerController(magnetometer);
         System.out.println("Magnetometer status: " + magnetometerController.getStatus());
