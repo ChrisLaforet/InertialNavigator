@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// Read about DDC in https://ozzmaker.com/wp-content/uploads/2019/09/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221_Public.pdf
+//
+//
 //$GPVTG	Vector track and Speed over the Ground
 //$GPGGA	GGA - essential fix data which provide 3D location and accuracy data.
 //$GPGLL	GLL - Geographic Latitude and Longitude
@@ -39,6 +42,12 @@ import java.util.Optional;
 
 public class GpsController implements IController {
 
+    public static final int DDC_NUMBER_BYTES_AVAILABLE_MSB = 0xfd;
+    public static final int DDC_NUMBER_BYTES_AVAILABLE_LSV = 0xfe;
+    public static final int DDC_DATASTREAM = 0xff;
+
+    public static final byte NOTHING_TO_READ = (byte)0xff;
+
     private Gps gps;
 
     public GpsController(Gps gps) {
@@ -54,14 +63,14 @@ public class GpsController implements IController {
             final StringBuilder sb = new StringBuilder();
 
             while (true) {
-                byte b = gps.readByte();
- System.err.print("READ=" + b);
-                if (b == '\n') {
+                byte value = gps.readByteFrom(DDC_DATASTREAM);
+ System.err.print("READ=" + value);
+                if (value == '\n') {
                     break;
-                } else if (b == (byte)255) {
+                } else if (value == NOTHING_TO_READ) {
                     return Optional.empty();
                 } else {
-                    sb.append((char)b);
+                    sb.append((char)value);
                 }
             }
             return I2CSupport.validateNMEALine(sb.toString());
