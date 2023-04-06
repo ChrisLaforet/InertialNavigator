@@ -42,11 +42,7 @@ import java.util.Optional;
 
 public class GpsController implements IController {
 
-    public static final int DDC_NUMBER_BYTES_AVAILABLE_MSB = 0xfd;
-    public static final int DDC_NUMBER_BYTES_AVAILABLE_LSV = 0xfe;
-    public static final int DDC_DATASTREAM = 0xff;
 
-    public static final byte NOTHING_TO_READ = (byte)0xff;
 
     private Gps gps;
 
@@ -63,11 +59,12 @@ public class GpsController implements IController {
             final StringBuilder sb = new StringBuilder();
 
             while (true) {
-                byte value = gps.readByteFrom(DDC_DATASTREAM);
+                byte value = gps.readByteFrom(Gps.DDC_DATASTREAM);
  System.err.print("READ=" + value);
+ // i2cget -y 1 0x42 0xff
                 if (value == '\n') {
                     break;
-                } else if (value == NOTHING_TO_READ) {
+                } else if (value == Gps.NOTHING_TO_READ) {
                     return Optional.empty();
                 } else {
                     sb.append((char)value);

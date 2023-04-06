@@ -39,15 +39,8 @@ public abstract class I2CBuilder {
         }
     }
 
-    public byte readByte() {
-        return device.readByteData(address);
-    }
-
     public byte readByteFrom(int register) {
         return device.readByteData(register);
-    }
-    public void writeByte(byte value) {
-        device.writeByte(value);
     }
 
     public void writeByteTo(byte value, int register) {
@@ -57,13 +50,29 @@ public abstract class I2CBuilder {
     public int readUnsignedInt16From(int register) {
         byte lsb = readByteFrom(register);
         byte msb = readByteFrom(register + 0x1);
-        return (msb << 0x08) | (lsb & 0xff);
+        return (msb << 0x8) | (lsb & 0xff);
     }
 
     public int readSignedInt16From(int register) {
         int value = readUnsignedInt16From(register);
         if (value > 0x7fff) {
             return value - 0xffff;
+        }
+        return value;
+    }
+
+    public long readUnsignedInt32From(int register) {
+        byte b0 = readByteFrom(register);       // lsb
+        byte b1 = readByteFrom(register + 0x1);
+        byte b2 = readByteFrom(register + 0x3);
+        byte b3 = readByteFrom(register + 0x3);     // msb
+        return ((b3 & 0xff) << 0x18) |  ((b2 & 0xff) << 0x10) |  ((b1 & 0xff) << 0x8) | (b0 & 0xff);
+    }
+
+    public long readSignedInt32From(int register) {
+        long value = readUnsignedInt32From(register);
+        if (value > 0x7fffffffffffL) {
+            return value - 0xffffffffffffffffL;
         }
         return value;
     }
