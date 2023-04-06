@@ -74,11 +74,15 @@ public class PressureSensor extends I2CBuilder {
         if (readByteFrom(BMP388_REG_ADD_WIA) == BMP388_REG_VAL_WIA) {
             isBMP388 = true;
 
+            System.out.println("Pressure sensor is BMP388!");
+
             if ((readByteFrom(BMP388_REG_ADD_STATUS) & BMP388_REG_VAL_CMD_RDY) != 0) {
                 writeByteTo((byte) BMP388_REG_VAL_SOFT_RESET, BMP388_REG_ADD_CMD);
             }
             sleepFor(10);
         } else {
+            System.out.println("Pressure sensor NULL!");
+
             writeByteTo((byte)(BMP388_REG_VAL_PRESS_EN | BMP388_REG_VAL_TEMP_EN | BMP388_REG_VAL_NORMAL_MODE), BMP388_REG_ADD_PWR_CTRL);
         }
 
@@ -100,5 +104,20 @@ public class PressureSensor extends I2CBuilder {
         var p9 = readSignedInt16From(BMP388_REG_ADD_P9_LSB);
         var p10 = readByteFrom(BMP388_REG_ADD_P10);
         var p11 = readByteFrom(BMP388_REG_ADD_P11);
+
+        System.out.println(t1);
+        System.out.println(t2);
+        System.out.println(t3);
+        System.out.println(p1);
+        System.out.println(p2);
+        System.out.println(p3);
+        System.out.println(p4);
+        System.out.println(p5);
+        System.out.println(p6);
+        System.out.println(p7);
+        System.out.println(p8);
+        System.out.println(p9);
+        System.out.println(p10);
+        System.out.println(p11);
     }
 }
