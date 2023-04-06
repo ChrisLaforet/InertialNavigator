@@ -58,6 +58,8 @@ public class GpsController implements IController {
         try {
             final StringBuilder sb = new StringBuilder();
 
+            int bytesAvailable = gps.readUnsignedInt16From(Gps.DDC_NUMBER_BYTES_AVAILABLE_MSB);
+System.err.println("Available = " + bytesAvailable);
             while (true) {
                 byte value = gps.readByteFrom(Gps.DDC_DATASTREAM);
  System.err.print("READ=" + value);
