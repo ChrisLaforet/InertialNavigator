@@ -41,7 +41,7 @@ public class PressureSensor extends I2CBuilder {
     public static final int BMP388_REG_ADD_T2_LSB = 0x33;
     public static final int BMP388_REG_ADD_T2_MSB = 0x34;
     public static final int BMP388_REG_ADD_T3 = 0x35;
-    public static final int BMP388_REG_ADD_P1_LSB = 0x36
+    public static final int BMP388_REG_ADD_P1_LSB = 0x36;
     public static final int BMP388_REG_ADD_P1_MSB = 0x37;
     public static final int BMP388_REG_ADD_P2_LSB = 0x38;
     public static final int BMP388_REG_ADD_P2_MSB = 0x39;
