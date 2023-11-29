@@ -62,7 +62,7 @@ public class GpsController implements IController {
 System.err.println("Available = " + bytesAvailable);
             while (true) {
                 byte value = gps.readByteFrom(Gps.DDC_DATASTREAM);
- System.err.print("READ=" + value);
+ System.err.print("READ=" + ((int)value & 0xff));
  // i2cget -y 1 0x42 0xff
                 if (value == '\n') {
                     break;
