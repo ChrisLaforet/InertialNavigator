@@ -8,6 +8,11 @@ public class Gps extends I2CBuilder {
 
     public static final int DDC_WRITE_ADDRESS = 0xff;
 
+    public static final byte PORT_CONFIG_BYTE_0 = (byte)0xB5;
+    public static final byte PORT_CONFIG_BYTE_1 = (byte)0x62;
+    public static final byte PORT_CONFIG_CLASS = (byte)0x6;
+    public static final byte PORT_CONFIG_ID = 0;
+
 
     public static final byte NOTHING_TO_READ = (byte)0xff;
 
@@ -30,4 +35,6 @@ public class Gps extends I2CBuilder {
 
         // send configuration save
     }
+
+    // Checksum is defined on page 135/136 of u-blox8 manual
 }
