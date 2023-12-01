@@ -47,6 +47,12 @@ public abstract class I2CBuilder {
         device.writeByteData(value, register);
     }
 
+    public void writeBytesTo(byte[] values, int length, int register) {
+        for (int offset = 0; offset < length; offset++) {
+            device.writeByteData(values[offset], register);
+        }
+    }
+
     public int readUnsignedInt16From(int register) {
         byte lsb = readByteFrom(register);
         byte msb = readByteFrom(register + 0x1);
